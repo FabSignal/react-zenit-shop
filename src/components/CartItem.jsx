@@ -4,7 +4,6 @@ function CartItem({ item }) {
   // Extraer funciones del carrito
   const { incrementQuantity, decrementQuantity, removeFromCart } = useCart();
 
-  // Destructuring del item
   const { product, quantity } = item;
 
   // Formatear precio

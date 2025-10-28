@@ -17,7 +17,6 @@ function ProductCard({ product }) {
   // Handler para agregar al carrito
   const handleAddToCart = () => {
     addToCart(product);
-    // Feedback visual (opcional): podrías agregar un toast/notification aquí
     console.log("✅ Producto agregado al carrito:", product.name);
   };
 
@@ -32,7 +31,7 @@ function ProductCard({ product }) {
           transition: "all 0.3s ease",
         }}
       >
-        {/* Badge de stock bajo (si quedan menos de 5) */}
+        {/* Bajo stock */}
         {product.stock < 5 && product.stock > 0 && (
           <div className="position-absolute top-0 end-0 m-3 z-index-1">
             <span className="badge bg-warning text-dark">
@@ -41,7 +40,7 @@ function ProductCard({ product }) {
           </div>
         )}
 
-        {/* Badge de sin stock */}
+        {/* Sin stock */}
         {product.stock === 0 && (
           <div className="position-absolute top-0 end-0 m-3 z-index-1">
             <span className="badge bg-danger">Sin stock</span>
@@ -49,7 +48,10 @@ function ProductCard({ product }) {
         )}
 
         {/* Imagen del producto */}
-        <Link to={`/producto/${product.id}`} className="text-decoration-none text-white">
+        <Link
+          to={`/producto/${product.id}`}
+          className="text-decoration-none text-white"
+        >
           <div
             className="position-relative overflow-hidden"
             style={{ height: "250px" }}
@@ -68,7 +70,7 @@ function ProductCard({ product }) {
           </div>
         </Link>
 
-        {/* Cuerpo de la card */}
+        {/* Cuerpo de la tarjeta */}
         <div className="card-body d-flex flex-column">
           {/* Nombre del producto */}
           <Link to={`/producto/${product.id}`} className="text-decoration-none">
@@ -83,7 +85,7 @@ function ProductCard({ product }) {
             </h5>
           </Link>
 
-          {/* Descripción truncada */}
+          {/* Descripción truncada*/}
           <p
             className="card-text text-white-50 small mb-3"
             style={{

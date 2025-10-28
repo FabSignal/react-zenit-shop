@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
-// Importar funciones de la API (lectura SIEMPRE desde la API desplegada)
+// Importar funciones de la API
 import { getProducts } from "../services/api";
 
 function Products() {
@@ -20,11 +20,11 @@ function Products() {
         setIsLoading(true);
         setError(null);
 
-        // Leer SIEMPRE desde la API (sin fallback local)
+        // Leer desde API
         const data = await getProducts();
         setProducts(data || []);
 
-        // Extraer categorías únicas de los productos
+        // Extraer categorías de los productos
         const uniqueCategories = [
           ...new Set(data.map((product) => product.category)),
         ];
@@ -35,9 +35,9 @@ function Products() {
         }));
         setCategories(categoriesArray);
       } catch (err) {
-        // Mostrar error y no usar datos mock (requerimiento del usuario)
+        // Mostrar error
         console.error("Error al cargar productos desde la API:", err);
-        setError("No se pudo cargar los productos desde la API.");
+        setError("No se pudieron cargar los productos !!!");
       } finally {
         setIsLoading(false);
       }

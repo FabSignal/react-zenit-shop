@@ -17,9 +17,8 @@ function Hero() {
         <div className="row align-items-center">
           {/* Columna de texto */}
           <div className="col-12 col-lg-8 text-white mb-5 mb-lg-0 text-start">
-            {/* Texto superior (sin recuadro) */}
+            {/* Texto superior*/}
             <div className="mb-4">
-              {/* Se conserva solo el texto y su color original */}
               <span className="fs-6" style={{ color: "#8b5cf6" }}>
                 ✨ Bienvenidos a Zenit
               </span>

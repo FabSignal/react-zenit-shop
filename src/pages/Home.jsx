@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
-// Leer destacados desde la API desplegada (sin usar mocks locales)
+
 import { getFeaturedProducts as apiGetFeaturedProducts } from "../services/api";
 
 function Home() {

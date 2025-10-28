@@ -1,40 +1,37 @@
 // src/components/Navbar.jsx
 
 import { useState } from "react";
-import { Link } from "react-router-dom"; // Link reemplaza <a href> para navegación SPA
+import { Link } from "react-router-dom";
 import logoZenit from "../assets/img/logo_zenit.png";
 import { useCart } from "../context/useCart";
 
 function Navbar() {
-  // Estado para controlar el menú móvil (hamburguesa)
+  // Estado para controlar el menú hamburguesa
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Obtener cantidad de items del carrito desde el contexto
+  // Obtener cantidad de items del carrito desde context
   const { totalItems } = useCart();
 
   // Alterna visibilidad del menú móvil
   const toggleMenu = () => setIsMenuOpen((v) => !v);
 
-  // Cierra el menú (útil al hacer click en cualquier link en móvil)
+  // Cierra el menú
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <nav
       className="navbar navbar-expand-lg navbar-dark sticky-top"
-      // Estilo visual (gradiente + sombra)
       style={{
         background: "linear-gradient(90deg, #0a0e27 0%, #1e293b 100%)",
         boxShadow: "0 4px 20px rgba(139, 92, 246, 0.3)",
       }}
     >
       <div className="container">
-        {/* Logo + nombre de la tienda (Link SPA para evitar recarga) */}
         <Link
           className="navbar-brand d-flex align-items-center"
           to="/"
           onClick={closeMenu}
         >
-          {/* Usar imagen del logo (casi el doble del tamaño anterior) */}
           <img
             src={logoZenit}
             alt="Zenit logo"

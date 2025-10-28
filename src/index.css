@@ -1,8 +1,4 @@
-/* ====================================
-   ZENIT ASTRO SHOP - ESTILOS BASE
-   ==================================== */
-
-/* Variables CSS - Paleta Astronómica */
+/* Variables*/
 :root {
   /* Colores primarios */
   --space-black: #0a0e27;
@@ -109,46 +105,19 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
-}
 
-/* ====================================
-   ANIMACIONES ASTRONÓMICAS
-   ==================================== */
-
-/* Animación de flotación para hero */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-/* Animación de parpadeo de estrellas */
-@keyframes twinkle {
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.6;
-  }
-}
-
-/* Hover effect para cards */
+/* Hover para tarjetas */
 .product-card:hover .card {
   transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(139, 92, 246, 0.4) !important;
 }
 
-/* Hover effect para links del navbar */
+/* Hover para links del navbar */
 .nav-link:hover {
   color: var(--stellar-gold) !important;
 }
 
-/* Hover effect para footer links */
+/* Hover para links del footer  */
 footer a:hover {
   color: var(--stellar-gold) !important;
   transform: translateX(5px);

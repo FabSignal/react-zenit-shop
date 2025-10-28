@@ -1,8 +1,8 @@
 // Servicio de acceso a la API de productos
-// - Usa una base URL tomada de variables de entorno de Vite
-// - Provee helpers para listar productos, obtener destacados y detalle por ID
 
-const BASE_URL = (import.meta.env.VITE_API_URL || "https://zenit-shop-api.onrender.com").replace(/\/$/, "");
+const BASE_URL = (
+  import.meta.env.VITE_API_URL || "https://zenit-shop-api.onrender.com"
+).replace(/\/$/, "");
 
 // Helper interno: fetch con timeout y manejo de errores básicos
 async function fetchJson(url, options = {}) {
@@ -13,7 +13,7 @@ async function fetchJson(url, options = {}) {
   try {
     const res = await fetch(url, { ...options, signal: controller.signal });
     if (!res.ok) {
-      // Lanzamos error con status para poder diagnosticar
+      // Error con status para poder diagnosticar
       const text = await res.text().catch(() => "");
       throw new Error(`HTTP ${res.status} ${res.statusText} - ${text}`);
     }
@@ -23,7 +23,7 @@ async function fetchJson(url, options = {}) {
   }
 }
 
-// =============== Endpoints públicos ===============
+// Endpoints
 
 // Lista completa de productos
 export async function getProducts() {
@@ -42,4 +42,3 @@ export async function getProductById(id) {
   // GET /products/:id
   return fetchJson(`${BASE_URL}/products/${id}`);
 }
-

@@ -14,7 +14,7 @@ export default function Offers() {
         setLoading(true);
         const data = await getProducts();
         if (!mounted) return;
-        // Usamos featured como criterio simple de "oferta"
+        // Se usa featured (en api)
         setItems(data.filter((p) => p.featured === true));
         setError(null);
       } catch (e) {
