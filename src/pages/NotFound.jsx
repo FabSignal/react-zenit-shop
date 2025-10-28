@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function NotFound() {
   return (
     <div
@@ -30,8 +32,8 @@ function NotFound() {
         </p>
 
         {/* Botón volver */}
-        <a
-          href="/"
+        <Link
+          to="/"
           className="btn btn-lg px-5 py-3 fw-semibold"
           style={{
             background: "linear-gradient(90deg, #8b5cf6 0%, #06b6d4 100%)",
@@ -41,7 +43,7 @@ function NotFound() {
           }}
         >
           🏠 Volver al Inicio
-        </a>
+        </Link>
       </div>
     </div>
   );
