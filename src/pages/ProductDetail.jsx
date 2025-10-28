@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import { getProductById } from "../services/api";
 
@@ -72,7 +72,7 @@ function ProductDetail() {
           <div className="mb-3" style={{ fontSize: "4rem" }}>⚠️</div>
           <h2 className="text-white mb-3">Producto no disponible</h2>
           <p className="text-white-50 mb-4">{error || "No encontramos el producto solicitado."}</p>
-          <a href="/productos" className="btn btn-outline-light">Volver a productos</a>
+          <Link to="/productos" className="btn btn-outline-light">Volver a productos</Link>
         </div>
       </div>
     );
@@ -88,22 +88,22 @@ function ProductDetail() {
         <nav className="mb-4">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-decoration-none"
                 style={{ color: "#fbbf24" }}
               >
                 Inicio
-              </a>
+              </Link>
             </li>
             <li className="breadcrumb-item">
-              <a
-                href="/productos"
+              <Link
+                to="/productos"
                 className="text-decoration-none"
                 style={{ color: "#fbbf24" }}
               >
                 Productos
-              </a>
+              </Link>
             </li>
             <li className="breadcrumb-item active text-white-50">
               {product.name}

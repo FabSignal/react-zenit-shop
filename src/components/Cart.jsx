@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import CartItem from "../components/CartItem";
 
@@ -30,8 +31,8 @@ function Cart() {
           <p className="text-white-50 mb-4">
             ¡Todavía no agregaste productos! Explora nuestro catálogo.
           </p>
-          <a
-            href="/productos"
+          <Link
+            to="/productos"
             className="btn btn-lg px-5 py-3 fw-semibold"
             style={{
               background: "linear-gradient(90deg, #8b5cf6 0%, #06b6d4 100%)",
@@ -41,7 +42,7 @@ function Cart() {
             }}
           >
             Ver Productos
-          </a>
+          </Link>
         </div>
       </div>
     );
@@ -135,13 +136,13 @@ function Cart() {
                 </button>
 
                 {/* Link para seguir comprando */}
-                <a
-                  href="/productos"
+                <Link
+                  to="/productos"
                   className="btn btn-outline-light w-100 py-2"
                   style={{ borderRadius: "10px" }}
                 >
                   ← Seguir Comprando
-                </a>
+                </Link>
 
                 {/* Info adicional */}
                 <div

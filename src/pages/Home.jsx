@@ -22,7 +22,9 @@ function Home() {
         setFeaturedProducts(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Error al cargar destacados desde la API:", err);
-        setError("No se pudieron cargar los productos destacados desde la API.");
+        setError(
+          "No se pudieron cargar los productos destacados desde la API."
+        );
       } finally {
         setIsLoading(false);
       }
@@ -64,7 +66,9 @@ function Home() {
       >
         <div className="container d-flex justify-content-center py-5">
           <div className="text-center">
-            <div className="mb-3" style={{ fontSize: "4rem" }}>⚠️</div>
+            <div className="mb-3" style={{ fontSize: "4rem" }}>
+              ⚠️
+            </div>
             <h2 className="text-white mb-3">Error al cargar destacados</h2>
             <p className="text-white-50 mb-4">{error}</p>
             <button
@@ -123,8 +127,8 @@ function Home() {
 
           {/* CTA */}
           <div className="text-center">
-            <a
-              href="/productos"
+            <Link
+              to="/productos"
               className="btn btn-lg px-5 py-3 fw-semibold"
               style={{
                 background: "linear-gradient(90deg, #8b5cf6 0%, #06b6d4 100%)",
@@ -137,7 +141,7 @@ function Home() {
               onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
             >
               Ver Todos los Productos
-            </a>
+            </Link>
           </div>
         </div>
       </section>

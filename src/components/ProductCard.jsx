@@ -62,7 +62,7 @@ function ProductCard({ product }) {
                 transition: "transform 0.5s ease",
                 cursor: "pointer",
               }}
-              onMouseEnter={(e) => (e.target.style.transform = "scale(1.1)")}
+              onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
               onMouseLeave={(e) => (e.target.style.transform = "scale(1)")}
             />
           </div>

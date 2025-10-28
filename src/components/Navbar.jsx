@@ -95,7 +95,7 @@ function Navbar() {
             <li className="nav-item">
               <Link
                 className="nav-link px-3 py-2"
-                to="/Ofertas"
+                to="/ofertas"
                 onClick={closeMenu}
                 style={{ transition: "color 0.3s ease", color: "#f8fafc" }}
               >
@@ -103,7 +103,7 @@ function Navbar() {
               </Link>
             </li>
 
-            {/* Botón: Carrito con badge dinámico */}
+            {/* Botón: Carrito*/}
             <li className="nav-item ms-lg-3">
               <Link
                 className="btn btn-outline-warning position-relative px-4 py-2"
@@ -127,7 +127,7 @@ function Navbar() {
               </Link>
             </li>
 
-            {/* Botón: Ingresar (Login) */}
+            {/* Botón: Ingresar (Login)*/}
             <li className="nav-item ms-lg-2">
               <Link
                 className="btn btn-outline-light px-4 py-2"

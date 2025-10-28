@@ -29,13 +29,11 @@ function Hero() {
             <h1
               className="display-3 fw-bold mb-4"
               style={{
-                lineHeight: "1.1",
+                lineHeight: "1.5",
                 background: "linear-gradient(90deg, #fbbf24 0%, #8b5cf6 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-                // Ajuste sutil de posición del título principal
-                // (acerca el título hacia arriba sin mover los botones)
                 marginTop: "-8px",
               }}
             >
