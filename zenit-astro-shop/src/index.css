@@ -1,0 +1,156 @@
+/* ====================================
+   ZENIT ASTRO SHOP - ESTILOS BASE
+   ==================================== */
+
+/* Variables CSS - Paleta Astronómica */
+:root {
+  /* Colores primarios */
+  --space-black: #0a0e27;
+  --deep-navy: #1e293b;
+  --astro-blue: #334155;
+
+  /* Colores de acento */
+  --stellar-gold: #fbbf24;
+  --nebula-purple: #8b5cf6;
+  --cosmic-cyan: #06b6d4;
+
+  /* Neutros */
+  --moonlight: #f8fafc;
+  --cosmic-gray: #64748b;
+
+  /* Gradientes */
+  --gradient-space: linear-gradient(
+    135deg,
+    #0a0e27 0%,
+    #1e293b 50%,
+    #334155 100%
+  );
+  --gradient-nebula: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+}
+
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
+  background: var(--gradient-space);
+  color: var(--moonlight);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Tipografía mejorada */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Links sin subrayado por defecto */
+a {
+  text-decoration: none;
+  color: var(--stellar-gold);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--nebula-purple);
+}
+
+/* Botones base */
+button {
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+/* Animación suave para todo */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar personalizado (para navegadores webkit) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--space-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--astro-blue);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--stellar-gold);
+}
+
+/* Selección de texto personalizada */
+::selection {
+  background: var(--nebula-purple);
+  color: white;
+}
+
+/* Mejora de imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ====================================
+   ANIMACIONES ASTRONÓMICAS
+   ==================================== */
+
+/* Animación de flotación para hero */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Animación de parpadeo de estrellas */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Hover effect para cards */
+.product-card:hover .card {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* Hover effect para links del navbar */
+.nav-link:hover {
+  color: var(--stellar-gold) !important;
+}
+
+/* Hover effect para footer links */
+footer a:hover {
+  color: var(--stellar-gold) !important;
+  transform: translateX(5px);
+  display: inline-block;
+}

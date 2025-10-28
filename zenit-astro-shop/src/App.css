@@ -1,0 +1,76 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* ─────────────────────────────────────────────
+   Caja translúcida “glassmorphism” del hero
+   ───────────────────────────────────────────── */
+.hero-glass {
+  /* fondo translúcido con leve gradiente para profundidad */
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+
+  /* borde y brillo sutil acordes a tu paleta */
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+
+  /* blur para efecto vidrio */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  /* sombra suave para levantar la caja */
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  /* ancho máximo para no ocupar todo en desktop */
+  max-width: 980px;
+}
+
+/* micro-ajuste en móviles: reducir padding para que respire mejor */
+@media (max-width: 576px) {
+  .hero-glass {
+    padding: 1.25rem !important;
+  }
+}
