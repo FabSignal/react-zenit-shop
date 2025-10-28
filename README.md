@@ -1,2 +1,1 @@
-# react-zenit-stellar-shop
-Tienda online para amantes del cosmos 🌌
+# Tienda online para amantes del cosmos 🌌
