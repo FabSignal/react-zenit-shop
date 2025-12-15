@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 
-import { getFeaturedProducts as apiGetFeaturedProducts } from "../services/api";
+import {
+  API_BASE_URL,
+  getFeaturedProducts as apiGetFeaturedProducts,
+} from "../services/api";
 
 function Home() {
   // Estado para productos destacados (desde la API)
@@ -23,7 +26,8 @@ function Home() {
       } catch (err) {
         console.error("Error al cargar destacados desde la API:", err);
         setError(
-          "No se pudieron cargar los productos destacados desde la API."
+          err?.message ||
+            "No se pudieron cargar los productos destacados desde la API."
         );
       } finally {
         setIsLoading(false);
@@ -70,7 +74,10 @@ function Home() {
               ⚠️
             </div>
             <h2 className="text-white mb-3">Error al cargar destacados</h2>
-            <p className="text-white-50 mb-4">{error}</p>
+            <p className="text-white-50 mb-2">{error}</p>
+            <p className="text-white-50 small mb-4">
+              Endpoint: {API_BASE_URL}/products?featured=true
+            </p>
             <button
               className="btn btn-outline-light"
               onClick={() => window.location.reload()}

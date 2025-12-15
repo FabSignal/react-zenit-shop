@@ -1,8 +1,10 @@
 // Servicio de acceso a la API de productos
 
-const BASE_URL = (
-  import.meta.env.VITE_API_URL || "https://zenit-shop-api.onrender.com"
-).replace(/\/$/, "");
+const DEFAULT_API_URL = "https://zenit-shop-api.onrender.com";
+const envApiUrl = (import.meta.env.VITE_API_URL || "").trim();
+const BASE_URL = (envApiUrl || DEFAULT_API_URL).replace(/\/$/, "");
+
+export const API_BASE_URL = BASE_URL;
 
 // Helper interno: fetch con timeout y manejo de errores básicos
 async function fetchJson(url, options = {}) {
@@ -15,9 +17,12 @@ async function fetchJson(url, options = {}) {
     if (!res.ok) {
       // Error con status para poder diagnosticar
       const text = await res.text().catch(() => "");
-      throw new Error(`HTTP ${res.status} ${res.statusText} - ${text}`);
+      throw new Error(`HTTP ${res.status} ${res.statusText} en ${url} - ${text}`);
     }
     return await res.json();
+  } catch (err) {
+    console.error(`Error en fetch ${url}`, err);
+    throw err;
   } finally {
     clearTimeout(id);
   }

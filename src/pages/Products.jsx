@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 // Importar funciones de la API
-import { getProducts } from "../services/api";
+import { API_BASE_URL, getProducts } from "../services/api";
 
 function Products() {
   // Estados para productos y filtros
@@ -35,9 +35,9 @@ function Products() {
         }));
         setCategories(categoriesArray);
       } catch (err) {
-        // Mostrar error
+        // Mostrar error con detalle
         console.error("Error al cargar productos desde la API:", err);
-        setError("No se pudieron cargar los productos !!!");
+        setError(err?.message || "No se pudieron cargar los productos");
       } finally {
         setIsLoading(false);
       }
@@ -101,7 +101,10 @@ function Products() {
             ⚠️
           </div>
           <h2 className="text-white mb-3">Error al cargar productos</h2>
-          <p className="text-white-50 mb-4">{error}</p>
+          <p className="text-white-50 mb-2">{error}</p>
+          <p className="text-white-50 small mb-4">
+            Endpoint: {API_BASE_URL}/products
+          </p>
           <button
             className="btn btn-outline-light"
             onClick={() => window.location.reload()}

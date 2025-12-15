@@ -15,7 +15,7 @@ import NotFound from "./pages/NotFound";
 function App() {
   return (
     // BrowserRouter envuelve la app y habilita el routing
-    <BrowserRouter basename="/react-zenit-shop">
+    <BrowserRouter>
       <div className="d-flex flex-column min-vh-100">
         {/* Navbar siempre visible en todas las páginas */}
         <Navbar />

@@ -105,6 +105,7 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
 
 /* Hover para tarjetas */
 .product-card:hover .card {
