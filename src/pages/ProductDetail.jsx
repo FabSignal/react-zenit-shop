@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import { getProductById } from "../services/api";
 import { Helmet } from "@dr.pogodin/react-helmet";
+import { toast } from "react-toastify";
 
 function ProductDetail() {
   // Leer ID de la URL para cargar el producto correspondiente
@@ -49,6 +50,7 @@ function ProductDetail() {
     for (let i = 0; i < quantity; i++) {
       addToCart(product);
     }
+    toast.success(`${product.name} agregado al carrito`);
   };
 
   // Estado de carga

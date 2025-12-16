@@ -13,6 +13,7 @@ function SearchBar({ value, onChange, placeholder = "Buscar productos..." }) {
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        aria-label="Buscar productos"
         style={{
           background: "rgba(255, 255, 255, 0.1)",
           border: "1px solid rgba(255, 255, 255, 0.2)",

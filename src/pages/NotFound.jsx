@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 function NotFound() {
   return (
@@ -6,6 +7,13 @@ function NotFound() {
       className="min-vh-100 d-flex align-items-center justify-content-center"
       style={{ background: "var(--gradient-space)" }}
     >
+      <Helmet>
+        <title>Página no encontrada | Zenit Astro Shop</title>
+        <meta
+          name="description"
+          content="La página que buscas no existe en Zenit Astro Shop."
+        />
+      </Helmet>
       <div className="text-center">
         {/* Emoji cohete gigante */}
         <div className="mb-4" style={{ fontSize: "10rem" }}>

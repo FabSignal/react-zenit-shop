@@ -31,6 +31,8 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
             i === currentPage ? "btn-primary" : "btn-outline-light"
           }`}
           onClick={() => onPageChange(i)}
+          aria-label={`Página ${i}`}
+          aria-current={i === currentPage ? "page" : undefined}
         >
           {i}
         </button>
@@ -45,6 +47,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         className="btn btn-outline-light"
         onClick={handlePrev}
         disabled={currentPage === 1}
+        aria-label="Página anterior"
       >
         Anterior
       </button>
@@ -53,6 +56,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
         className="btn btn-outline-light"
         onClick={handleNext}
         disabled={currentPage === totalPages}
+        aria-label="Página siguiente"
       >
         Siguiente
       </button>

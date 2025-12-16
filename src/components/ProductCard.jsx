@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
+import { toast } from "react-toastify";
 
 function ProductCard({ product }) {
   // Acceder a las funciones del carrito
@@ -17,7 +18,7 @@ function ProductCard({ product }) {
   // Handler para agregar al carrito
   const handleAddToCart = () => {
     addToCart(product);
-    console.log("✅ Producto agregado al carrito:", product.name);
+    toast.success(`${product.name} agregado al carrito`);
   };
 
   return (

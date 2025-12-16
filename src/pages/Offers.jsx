@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { getProducts } from "../services/api";
 import ProductCard from "../components/ProductCard";
 
@@ -37,6 +38,13 @@ export default function Offers() {
 
   return (
     <div className="container py-5">
+      <Helmet>
+        <title>Ofertas | Zenit Astro Shop</title>
+        <meta
+          name="description"
+          content="Explora promociones y descuentos en productos astronómicos."
+        />
+      </Helmet>
       <div className="text-center mb-5">
         <h1 className="display-4 fw-bold text-white mb-3">🔥 Ofertas</h1>
         <p className="lead text-white-50">
