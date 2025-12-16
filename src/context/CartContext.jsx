@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useMemo, useRef, useState } from "react";
+import { useAuth } from "./useAuth";
 
 // createContext() crea un "espacio compartido"(contexto) donde guardar datos
 // Cualquier componente puede acceder a estos datos sin pasar props
@@ -10,6 +11,35 @@ export function CartProvider({ children }) {
   // Estado del carrito - array de objetos
   // Cada objeto tiene: { product, quantity }
   const [cartItems, setCartItems] = useState([]);
+  const { user } = useAuth();
+  const lastStorageKeyRef = useRef(null);
+
+  const storageKey = useMemo(
+    () => (user?.email ? `cart_items:${user.email}` : null),
+    [user]
+  );
+
+  useEffect(() => {
+    if (!storageKey && lastStorageKeyRef.current) {
+      localStorage.removeItem(lastStorageKeyRef.current);
+      lastStorageKeyRef.current = null;
+      setCartItems([]);
+      return;
+    }
+
+    if (!storageKey) {
+      setCartItems([]);
+      return;
+    }
+    lastStorageKeyRef.current = storageKey;
+    const saved = localStorage.getItem(storageKey);
+    setCartItems(saved ? JSON.parse(saved) : []);
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (!storageKey) return;
+    localStorage.setItem(storageKey, JSON.stringify(cartItems));
+  }, [cartItems, storageKey]);
 
   // Función para agregar al carrito
   const addToCart = (product) => {
@@ -85,6 +115,9 @@ export function CartProvider({ children }) {
   // Función para vaciar carrito
   const clearCart = () => {
     setCartItems([]);
+    if (storageKey) {
+      localStorage.removeItem(storageKey);
+    }
   };
 
   // Cálculos
