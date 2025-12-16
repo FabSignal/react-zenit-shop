@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Offers from "./pages/Offers";
+import AdminProducts from "./pages/AdminProducts";
+import { ToastContainer } from "react-toastify";
 
 // Páginas
 import Home from "./pages/Home";
@@ -38,6 +40,9 @@ function App() {
             {/* Ruta para las ofertas */}
             <Route path="/ofertas" element={<Offers />} />
 
+            {/* Ruta admin */}
+            <Route path="/admin" element={<AdminProducts />} />
+
             {/* Ruta 404*/}
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -46,6 +51,7 @@ function App() {
         {/* Footer siempre visible en todas las páginas */}
         <Footer />
       </div>
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
     </BrowserRouter>
   );
 }
