@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logoZenit from "../assets/img/logo_zenit.png";
 import { useCart } from "../context/useCart";
+import { FiSettings } from "react-icons/fi";
 
 function Navbar() {
   // Estado para controlar el menú hamburguesa
@@ -121,6 +122,22 @@ function Navbar() {
                     {totalItems}
                   </span>
                 )}
+              </Link>
+            </li>
+
+            {/* Botón: Admin */}
+            <li className="nav-item ms-lg-2">
+              <Link
+                className="btn btn-outline-light px-4 py-2 d-flex align-items-center gap-2"
+                to="/admin"
+                onClick={closeMenu}
+                style={{
+                  borderRadius: "25px",
+                  fontWeight: "600",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                <FiSettings /> Admin
               </Link>
             </li>
 

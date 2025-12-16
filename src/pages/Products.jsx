@@ -1,50 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
-// Importar funciones de la API
-import { API_BASE_URL, getProducts } from "../services/api";
+import { API_BASE_URL } from "../services/api";
+import { useProducts } from "../context/ProductsContext";
 
 function Products() {
-  // Estados para productos y filtros
-  const [products, setProducts] = useState([]);
+  const { products, loading, error, refreshProducts } = useProducts();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
-
-  // Estados para manejo de carga y errores
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  // useEffect para fetch de productos al montar el componente (desde API)
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-
-        // Leer desde API
-        const data = await getProducts();
-        setProducts(data || []);
-
-        // Extraer categorías de los productos
-        const uniqueCategories = [
-          ...new Set(data.map((product) => product.category)),
-        ];
-        const categoriesArray = uniqueCategories.map((cat) => ({
-          id: cat,
-          name: cat,
-          icon: getCategoryIcon(cat),
-        }));
-        setCategories(categoriesArray);
-      } catch (err) {
-        // Mostrar error con detalle
-        console.error("Error al cargar productos desde la API:", err);
-        setError(err?.message || "No se pudieron cargar los productos");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []); // Array vacío: ejecuta solo al montar
 
   // Función helper para asignar iconos según categoría
   const getCategoryIcon = (category) => {
@@ -62,14 +24,29 @@ function Products() {
     return icons[category] || "🌌";
   };
 
+  useEffect(() => {
+    const uniqueCategories = [
+      ...new Set(products.map((product) => product.category)),
+    ];
+    const categoriesArray = uniqueCategories.map((cat) => ({
+      id: cat,
+      name: cat,
+      icon: getCategoryIcon(cat),
+    }));
+    setCategories(categoriesArray);
+  }, [products]);
+
   // Filtrar productos según categoría seleccionada
-  const filteredProducts =
-    selectedCategory === "all"
-      ? products
-      : products.filter((product) => product.category === selectedCategory);
+  const filteredProducts = useMemo(
+    () =>
+      selectedCategory === "all"
+        ? products
+        : products.filter((product) => product.category === selectedCategory),
+    [products, selectedCategory]
+  );
 
   // Estado de carga
-  if (isLoading) {
+  if (loading) {
     return (
       <div
         className="min-vh-100 d-flex align-items-center justify-content-center"
@@ -107,7 +84,7 @@ function Products() {
           </p>
           <button
             className="btn btn-outline-light"
-            onClick={() => window.location.reload()}
+            onClick={refreshProducts}
           >
             Reintentar
           </button>

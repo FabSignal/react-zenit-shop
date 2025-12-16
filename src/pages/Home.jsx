@@ -1,43 +1,21 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 
-import {
-  API_BASE_URL,
-  getFeaturedProducts as apiGetFeaturedProducts,
-} from "../services/api";
+import { API_BASE_URL } from "../services/api";
+import { useProducts } from "../context/ProductsContext";
 
 function Home() {
-  // Estado para productos destacados (desde la API)
-  const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { products, loading, error, refreshProducts } = useProducts();
 
-  // Cargar destacados en el montaje
-  useEffect(() => {
-    const load = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        const data = await apiGetFeaturedProducts();
-        // data debe ser un array de productos con featured=true
-        setFeaturedProducts(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error("Error al cargar destacados desde la API:", err);
-        setError(
-          err?.message ||
-            "No se pudieron cargar los productos destacados desde la API."
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    load();
-  }, []);
+  const featuredProducts = useMemo(
+    () => products.filter((p) => p.featured),
+    [products]
+  );
 
   // Estado de carga de destacados
-  if (isLoading) {
+  if (loading) {
     return (
       <section
         className="py-5"
@@ -70,22 +48,22 @@ function Home() {
       >
         <div className="container d-flex justify-content-center py-5">
           <div className="text-center">
-            <div className="mb-3" style={{ fontSize: "4rem" }}>
-              ⚠️
-            </div>
-            <h2 className="text-white mb-3">Error al cargar destacados</h2>
-            <p className="text-white-50 mb-2">{error}</p>
-            <p className="text-white-50 small mb-4">
-              Endpoint: {API_BASE_URL}/products?featured=true
-            </p>
-            <button
-              className="btn btn-outline-light"
-              onClick={() => window.location.reload()}
-            >
-              Reintentar
-            </button>
+          <div className="mb-3" style={{ fontSize: "4rem" }}>
+            ⚠️
           </div>
+          <h2 className="text-white mb-3">Error al cargar destacados</h2>
+          <p className="text-white-50 mb-2">{error}</p>
+          <p className="text-white-50 small mb-4">
+            Endpoint: {API_BASE_URL}/products?featured=true
+          </p>
+          <button
+            className="btn btn-outline-light"
+            onClick={refreshProducts}
+          >
+            Reintentar
+          </button>
         </div>
+      </div>
       </section>
     );
   }

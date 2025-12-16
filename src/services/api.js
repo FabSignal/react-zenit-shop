@@ -13,7 +13,14 @@ async function fetchJson(url, options = {}) {
   const id = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const res = await fetch(url, { ...options, signal: controller.signal });
+    const res = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        ...(options.headers || {}),
+      },
+      ...options,
+      signal: controller.signal,
+    });
     if (!res.ok) {
       // Error con status para poder diagnosticar
       const text = await res.text().catch(() => "");
@@ -46,4 +53,27 @@ export async function getFeaturedProducts() {
 export async function getProductById(id) {
   // GET /products/:id
   return fetchJson(`${BASE_URL}/products/${id}`);
+}
+
+// Crear producto
+export async function createProduct(payload) {
+  return fetchJson(`${BASE_URL}/products`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+// Actualizar producto
+export async function updateProduct(id, payload) {
+  return fetchJson(`${BASE_URL}/products/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+}
+
+// Eliminar producto
+export async function deleteProduct(id) {
+  return fetchJson(`${BASE_URL}/products/${id}`, {
+    method: "DELETE",
+  });
 }
