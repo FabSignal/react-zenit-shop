@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/useAuth";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,13 @@ function Login() {
       className="min-vh-100 d-flex align-items-center"
       style={{ background: "var(--gradient-space)" }}
     >
+      <Helmet>
+        <title>Login | Zenit Astro Shop</title>
+        <meta
+          name="description"
+          content="Inicia sesión para acceder al carrito y gestionar tus compras."
+        />
+      </Helmet>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-md-6 col-lg-4">

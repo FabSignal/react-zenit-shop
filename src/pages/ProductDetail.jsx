@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import { getProductById } from "../services/api";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 function ProductDetail() {
   // Leer ID de la URL para cargar el producto correspondiente
@@ -83,6 +84,10 @@ function ProductDetail() {
       className="min-vh-100 py-5"
       style={{ background: "var(--gradient-space)" }}
     >
+      <Helmet>
+        <title>{product.name} | Zenit Astro Shop</title>
+        <meta name="description" content={product.description} />
+      </Helmet>
       <div className="container">
         {/* Breadcrumb */}
         <nav className="mb-4">
@@ -208,12 +213,13 @@ function ProductDetail() {
                     </label>
                     <div className="d-flex align-items-center gap-2">
                       <button
-                        className="btn btn-outline-light btn-sm"
-                        onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        style={{ width: "40px", height: "40px" }}
-                      >
-                        −
-                      </button>
+                      className="btn btn-outline-light btn-sm"
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      aria-label="Disminuir cantidad"
+                      style={{ width: "40px", height: "40px" }}
+                    >
+                      −
+                    </button>
                       <span
                         className="text-white fw-bold px-3 py-2 text-center"
                         style={{
@@ -225,13 +231,14 @@ function ProductDetail() {
                         {quantity}
                       </span>
                       <button
-                        className="btn btn-outline-light btn-sm"
-                        onClick={() => setQuantity(Math.min(product.stock || 1, quantity + 1))}
-                        style={{ width: "40px", height: "40px" }}
-                      >
-                        +
-                      </button>
-                    </div>
+                      className="btn btn-outline-light btn-sm"
+                      onClick={() => setQuantity(Math.min(product.stock || 1, quantity + 1))}
+                      aria-label="Aumentar cantidad"
+                      style={{ width: "40px", height: "40px" }}
+                    >
+                      +
+                    </button>
+                  </div>
                   </div>
 
                   {/* Botón agregar */}
@@ -240,6 +247,7 @@ function ProductDetail() {
                       className="btn w-100 py-3 fw-bold"
                       onClick={handleAddToCart}
                       disabled={product.stock === 0}
+                      aria-label={`Agregar ${product.name} al carrito`}
                       style={{
                         background:
                           product.stock === 0

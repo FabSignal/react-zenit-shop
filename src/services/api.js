@@ -23,7 +23,13 @@ async function fetchJson(url, options = {}) {
       const text = await res.text().catch(() => "");
       throw new Error(`HTTP ${res.status} ${res.statusText} en ${url} - ${text}`);
     }
-    return await res.json();
+    const isEmpty =
+      res.status === 204 ||
+      res.headers.get("Content-Length") === "0" ||
+      res.headers.get("content-length") === "0";
+    if (isEmpty) return null;
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
   } catch (err) {
     console.error(`Error en fetch ${url}`, err);
     throw err;

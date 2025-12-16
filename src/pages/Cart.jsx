@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/useCart";
 import CartItem from "../components/CartItem";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 function Cart() {
   const { cartItems, totalPrice, totalItems, clearCart } = useCart();
@@ -54,6 +55,15 @@ function Cart() {
       className="min-vh-100 py-5"
       style={{ background: "var(--gradient-space)" }}
     >
+      <Helmet>
+        <title>Carrito | Zenit Astro Shop</title>
+        <meta
+          name="description"
+          content={`Tienes ${totalItems} ${
+            totalItems === 1 ? "producto" : "productos"
+          } en tu carrito`}
+        />
+      </Helmet>
       <div className="container">
         {/* Header de la página */}
         <div className="mb-5">

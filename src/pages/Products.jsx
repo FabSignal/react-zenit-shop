@@ -1,12 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import SearchBar from "../components/SearchBar";
+import Pagination from "../components/Pagination";
 import { API_BASE_URL } from "../services/api";
 import { useProducts } from "../context/ProductsContext";
+import { Helmet } from "@dr.pogodin/react-helmet";
 
 function Products() {
   const { products, loading, error, refreshProducts } = useProducts();
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 12;
 
   // Función helper para asignar iconos según categoría
   const getCategoryIcon = (category) => {
@@ -36,14 +42,37 @@ function Products() {
     setCategories(categoriesArray);
   }, [products]);
 
-  // Filtrar productos según categoría seleccionada
-  const filteredProducts = useMemo(
-    () =>
-      selectedCategory === "all"
-        ? products
-        : products.filter((product) => product.category === selectedCategory),
-    [products, selectedCategory]
-  );
+  const filteredProducts = useMemo(() => {
+    let filtered = products;
+
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter(
+        (product) => product.category === selectedCategory
+      );
+    }
+
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(term) ||
+          product.category.toLowerCase().includes(term)
+      );
+    }
+
+    return filtered;
+  }, [products, selectedCategory, searchTerm]);
+
+  const totalPages = Math.ceil(filteredProducts.length / pageSize);
+
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return filteredProducts.slice(start, start + pageSize);
+  }, [filteredProducts, currentPage, pageSize]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, selectedCategory]);
 
   // Estado de carga
   if (loading) {
@@ -98,6 +127,13 @@ function Products() {
       className="min-vh-100 py-5"
       style={{ background: "var(--gradient-space)" }}
     >
+      <Helmet>
+        <title>Productos | Zenit Astro Shop</title>
+        <meta
+          name="description"
+          content="Catálogo completo de productos astronómicos, telescopios y accesorios."
+        />
+      </Helmet>
       <div className="container">
         {/* Header */}
         <div className="text-center mb-5">
@@ -109,7 +145,14 @@ function Products() {
           </p>
         </div>
 
-        {/* Filtros por categoría */}
+        <div className="mb-4">
+          <SearchBar
+            value={searchTerm}
+            onChange={setSearchTerm}
+            placeholder="Buscar por nombre o categoría..."
+          />
+        </div>
+
         <div className="mb-5">
           <div className="d-flex flex-wrap justify-content-center gap-3">
             {/* Botón "Todas" */}
@@ -160,27 +203,31 @@ function Products() {
           </p>
         </div>
 
-        {/* Grid de productos */}
         <div className="row g-4">
-          {filteredProducts.map((product) => (
+          {paginatedProducts.map((product) => (
             <div key={product.id} className="col-12 col-sm-6 col-lg-3">
               <ProductCard product={product} />
             </div>
           ))}
         </div>
 
-        {/* Mensaje si no hay productos */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-5">
             <div className="mb-3" style={{ fontSize: "4rem" }}>
               🔍
             </div>
-            <h3 className="text-white mb-2">
-              No hay productos en esta categoría
-            </h3>
-            <p className="text-white-50">Prueba seleccionando otra categoría</p>
+            <h3 className="text-white mb-2">No hay productos</h3>
+            <p className="text-white-50">
+              Prueba con otra búsqueda o categoría
+            </p>
           </div>
         )}
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );

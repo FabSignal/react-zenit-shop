@@ -113,6 +113,7 @@ function ProductCard({ product }) {
               className="btn w-100 py-2 fw-semibold"
               onClick={handleAddToCart}
               disabled={product.stock === 0}
+              aria-label={`Agregar ${product.name} al carrito`}
               style={{
                 background:
                   product.stock === 0

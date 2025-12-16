@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 
@@ -70,7 +71,13 @@ function Home() {
 
   return (
     <>
-      {/* Hero */}
+      <Helmet>
+        <title>Zenit Astro Shop | Inicio</title>
+        <meta
+          name="description"
+          content="Tienda online de productos astronómicos. Telescopios, accesorios, libros y más para explorar el universo."
+        />
+      </Helmet>
       <Hero />
 
       {/* Sección de productos destacados */}

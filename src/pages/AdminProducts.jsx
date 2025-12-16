@@ -149,12 +149,14 @@ function AdminProducts() {
               className="btn btn-outline-light d-flex align-items-center gap-2"
               onClick={refreshProducts}
               disabled={loading}
+              aria-label="Actualizar listado"
             >
-              <FiRefreshCw /> Refrescar
+              <FiRefreshCw /> Actualizar
             </button>
             <button
               className="btn btn-success d-flex align-items-center gap-2"
               onClick={cancelEdit}
+              aria-label="Nuevo producto"
             >
               <FiPlus /> Nuevo
             </button>
@@ -358,6 +360,7 @@ function AdminProducts() {
                                 className="btn btn-sm btn-outline-light d-flex align-items-center gap-1"
                                 onClick={() => startEdit(product)}
                                 disabled={isMutating}
+                                aria-label={`Editar ${product.name}`}
                               >
                                 <FiEdit /> Editar
                               </button>
@@ -365,6 +368,7 @@ function AdminProducts() {
                                 className="btn btn-sm btn-outline-danger d-flex align-items-center gap-1"
                                 onClick={() => setDeleteTarget(product)}
                                 disabled={isMutating}
+                                aria-label={`Eliminar ${product.name}`}
                               >
                                 <FiTrash2 /> Eliminar
                               </button>

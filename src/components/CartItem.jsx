@@ -66,6 +66,7 @@ function CartItem({ item }) {
                   <button
                     className="btn btn-sm btn-outline-light"
                     onClick={() => decrementQuantity(product.id)}
+                    aria-label={`Disminuir cantidad de ${product.name}`}
                     style={{
                       width: "35px",
                       height: "35px",
@@ -95,6 +96,7 @@ function CartItem({ item }) {
                   <button
                     className="btn btn-sm btn-outline-light"
                     onClick={() => incrementQuantity(product.id)}
+                    aria-label={`Aumentar cantidad de ${product.name}`}
                     style={{
                       width: "35px",
                       height: "35px",
@@ -120,6 +122,7 @@ function CartItem({ item }) {
                 <button
                   className="btn btn-sm btn-outline-danger"
                   onClick={() => removeFromCart(product.id)}
+                  aria-label={`Eliminar ${product.name} del carrito`}
                   style={{
                     borderRadius: "8px",
                     fontSize: "0.85rem",
