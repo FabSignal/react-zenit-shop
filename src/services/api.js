@@ -6,9 +6,7 @@ const BASE_URL = (envApiUrl || DEFAULT_API_URL).replace(/\/$/, "");
 
 export const API_BASE_URL = BASE_URL;
 
-// Helper interno: fetch con timeout y manejo de errores básicos
 async function fetchJson(url, options = {}) {
-  // Controlador para abortar por timeout (10s)
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), 10000);
 
@@ -22,7 +20,6 @@ async function fetchJson(url, options = {}) {
       signal: controller.signal,
     });
     if (!res.ok) {
-      // Error con status para poder diagnosticar
       const text = await res.text().catch(() => "");
       throw new Error(`HTTP ${res.status} ${res.statusText} en ${url} - ${text}`);
     }

@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { createContext, useEffect, useMemo, useState } from "react";
 import { useAuth } from "./useAuth";
 
@@ -41,7 +40,7 @@ export function CartProvider({ children }) {
       );
 
       if (existingItem) {
-        // Si existe, aunmentar cantidad
+        // Si existe, aumentar cantidad
         return prevItems.map((item) =>
           item.product.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
