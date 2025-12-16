@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 // Context Provider
 import { CartProvider } from "./context/CartContext";
 import { ProductsProvider } from "./context/ProductsContext";
-import { HelmetProvider } from "react-helmet-async";
+import { HelmetProvider } from "@dr.pogodin/react-helmet";
 
 // Se importa bootstrap antes que css
 import "bootstrap/dist/css/bootstrap.min.css";

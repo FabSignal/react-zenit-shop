@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "@dr.pogodin/react-helmet";
 import { FiEdit, FiPlus, FiRefreshCw, FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import ConfirmModal from "../components/ConfirmModal";
