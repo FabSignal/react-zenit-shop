@@ -124,3 +124,32 @@ footer a:hover {
   transform: translateX(5px);
   display: inline-block;
 }
+
+@media (max-width: 655px) {
+  .hero-section .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .nav-admin-btn {
+    padding: 0.52rem 1.05rem !important;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar .nav-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-action-btn {
+    padding: 0.65rem 1.4rem !important;
+    width: auto;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  .nav-admin-btn {
+    padding: 0.6rem 1.1rem !important;
+  }
+}

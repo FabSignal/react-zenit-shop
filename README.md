@@ -25,6 +25,12 @@ npm install
 ```bash
 # Modo desarrollo
 npm run dev
+
+# Build para producción
+npm run build
+
+# Preview del build
+npm run preview
 ```
 
 ## Variables de entorno

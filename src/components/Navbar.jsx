@@ -115,7 +115,7 @@ function Navbar() {
             {/* Botón: Carrito*/}
             <li className="nav-item ms-lg-3">
               <Link
-                className="btn btn-outline-warning position-relative px-4 py-2"
+                className="btn btn-outline-warning position-relative px-4 py-2 nav-action-btn"
                 to="/carrito"
                 onClick={closeMenu}
                 style={{
@@ -139,7 +139,7 @@ function Navbar() {
             {/* Botón: Admin */}
             <li className="nav-item ms-lg-2">
               <Link
-                className="btn btn-outline-light px-4 py-2 d-flex align-items-center gap-2"
+                className="btn btn-outline-light px-4 py-2 d-flex align-items-center gap-1 nav-admin-btn nav-action-btn"
                 to="/admin"
                 onClick={closeMenu}
                 style={{
@@ -156,7 +156,7 @@ function Navbar() {
             <li className="nav-item ms-lg-2">
               {isAuthenticated ? (
                 <button
-                  className="btn btn-outline-danger px-4 py-2"
+                  className="btn btn-outline-danger px-4 py-2 nav-action-btn"
                   onClick={handleLogout}
                   style={{
                     borderRadius: "25px",
@@ -168,7 +168,7 @@ function Navbar() {
                 </button>
               ) : (
                 <Link
-                  className="btn btn-outline-light px-4 py-2"
+                  className="btn btn-outline-light px-4 py-2 nav-action-btn"
                   to="/login"
                   onClick={closeMenu}
                   style={{

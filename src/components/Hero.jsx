@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const StyledHero = styled.section`
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  background: linear-gradient(135deg, #0a0e27 0%, #1e293b 50%, #334155 100%);
+  display: flex;
+  align-items: center;
+`;
 
 function Hero() {
   return (
-    <section
-      className="hero-section position-relative overflow-hidden"
-      style={{
-        minHeight: "600px",
-        background:
-          "linear-gradient(135deg, #0a0e27 0%, #1e293b 50%, #334155 100%)",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
+    <StyledHero className="hero-section">
       {/* Contenido principal */}
       <div className="container position-relative">
         <div className="row align-items-center">
@@ -126,7 +127,7 @@ function Hero() {
           pointerEvents: "none",
         }}
       />
-    </section>
+    </StyledHero>
   );
 }
 
