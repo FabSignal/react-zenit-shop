@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { useAuth } from "./useAuth";
 
 // createContext() crea un "espacio compartido"(contexto) donde guardar datos
@@ -12,7 +12,6 @@ export function CartProvider({ children }) {
   // Cada objeto tiene: { product, quantity }
   const [cartItems, setCartItems] = useState([]);
   const { user } = useAuth();
-  const lastStorageKeyRef = useRef(null);
 
   const storageKey = useMemo(
     () => (user?.email ? `cart_items:${user.email}` : null),
@@ -20,18 +19,10 @@ export function CartProvider({ children }) {
   );
 
   useEffect(() => {
-    if (!storageKey && lastStorageKeyRef.current) {
-      localStorage.removeItem(lastStorageKeyRef.current);
-      lastStorageKeyRef.current = null;
-      setCartItems([]);
-      return;
-    }
-
     if (!storageKey) {
       setCartItems([]);
       return;
     }
-    lastStorageKeyRef.current = storageKey;
     const saved = localStorage.getItem(storageKey);
     setCartItems(saved ? JSON.parse(saved) : []);
   }, [storageKey]);
