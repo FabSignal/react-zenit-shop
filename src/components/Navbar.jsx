@@ -1,10 +1,12 @@
 // src/components/Navbar.jsx
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoZenit from "../assets/img/logo_zenit.png";
 import { useCart } from "../context/useCart";
 import { FiSettings } from "react-icons/fi";
+import { useAuth } from "../context/useAuth";
+import { toast } from "react-toastify";
 
 function Navbar() {
   // Estado para controlar el menú hamburguesa
@@ -12,12 +14,21 @@ function Navbar() {
 
   // Obtener cantidad de items del carrito desde context
   const { totalItems } = useCart();
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
 
   // Alterna visibilidad del menú móvil
   const toggleMenu = () => setIsMenuOpen((v) => !v);
 
   // Cierra el menú
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleLogout = () => {
+    logout();
+    toast.success("Sesión cerrada");
+    closeMenu();
+    navigate("/");
+  };
 
   return (
     <nav
@@ -143,18 +154,32 @@ function Navbar() {
 
             {/* Botón: Ingresar (Login)*/}
             <li className="nav-item ms-lg-2">
-              <Link
-                className="btn btn-outline-light px-4 py-2"
-                to="/login"
-                onClick={closeMenu}
-                style={{
-                  borderRadius: "25px",
-                  fontWeight: "600",
-                  transition: "all 0.3s ease",
-                }}
-              >
-                Ingresar
-              </Link>
+              {isAuthenticated ? (
+                <button
+                  className="btn btn-outline-danger px-4 py-2"
+                  onClick={handleLogout}
+                  style={{
+                    borderRadius: "25px",
+                    fontWeight: "600",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Salir {user?.email ? `(${user.email})` : ""}
+                </button>
+              ) : (
+                <Link
+                  className="btn btn-outline-light px-4 py-2"
+                  to="/login"
+                  onClick={closeMenu}
+                  style={{
+                    borderRadius: "25px",
+                    fontWeight: "600",
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  Ingresar
+                </Link>
+              )}
             </li>
           </ul>
         </div>

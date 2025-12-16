@@ -5,13 +5,13 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Offers from "./pages/Offers";
 import AdminProducts from "./pages/AdminProducts";
-
-// Páginas
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import ProductDetail from "./pages/ProductDetail";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
 
 function App() {
   return (
@@ -34,7 +34,17 @@ function App() {
             <Route path="/producto/:id" element={<ProductDetail />} />
 
             {/* Ruta para el carrito */}
-            <Route path="/carrito" element={<Cart />} />
+            <Route
+              path="/carrito"
+              element={
+                <ProtectedRoute>
+                  <Cart />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Ruta login */}
+            <Route path="/login" element={<Login />} />
 
             {/* Ruta para las ofertas */}
             <Route path="/ofertas" element={<Offers />} />
