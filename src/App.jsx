@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Offers from "./pages/Offers";
 import AdminProducts from "./pages/AdminProducts";
-import { ToastContainer } from "react-toastify";
 
 // Páginas
 import Home from "./pages/Home";
@@ -51,7 +50,6 @@ function App() {
         {/* Footer siempre visible en todas las páginas */}
         <Footer />
       </div>
-      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
     </BrowserRouter>
   );
 }
